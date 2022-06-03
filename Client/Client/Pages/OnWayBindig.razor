@@ -1,0 +1,12 @@
+﻿@page "/OnWayBinding"
+<h3>OnWayBindig</h3>
+<h3>@message</h3>
+<input type="text" value="@message"/>
+<button type="button" @onclick="UpdateText">Change Text</button>
+@code {
+    string message = "My Name is Behrooz Talavari!";
+    private void UpdateText()
+    {
+        message="the text has been Changed";
+    }
+}

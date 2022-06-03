@@ -1,0 +1,20 @@
+﻿@page "/TwoWayBindig"
+<h3>OnWayBindig</h3>
+<h3>@message</h3>
+<input type="text" @bind="message" style="width:100%"/>
+<input type="text" @bind-value="message" style="width:100%"/>
+<hr />
+<button type="button" @onclick="UpdateText">Change Text</button>
+<button type="button" @onclick="()=>{UpdateText();}">Change Text</button>
+<hr />
+<input type="text"  @bind="message" @bind:event="onchange" style="width:100%"/>
+<input type="text"  @bind="message" @bind:event="oninput" style="width:100%"/>
+
+
+@code {
+    string message = "My Name is Behrooz Talavari!";
+    private void UpdateText()
+    {
+        message="the text has been Changed";
+    }
+}
