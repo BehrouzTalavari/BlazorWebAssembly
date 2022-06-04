@@ -8,5 +8,20 @@
 Welcome to your new app.
 
 <SurveyPrompt Title="How is Blazor working for you?" />
-<MiladiToShamsi inputDate="DateTime.Now"></MiladiToShamsi>
+<MiladiToShamsi inputDate="DateTime.Now"></MiladiToShamsi> 
+
+<DollarToRial OnRialChanged="(e)=>{RialChanged(e);}"/>
+<hr/>
+
+@if (rials>0)
+{
+    @(rials.ToString("#,##0"))
+}
+@code{
+    private long rials;
+    public void RialChanged(long newrials)
+    {
+        rials=newrials;
+    }
+}
 
