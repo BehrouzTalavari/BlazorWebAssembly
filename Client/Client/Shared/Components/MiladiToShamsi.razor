@@ -1,0 +1,25 @@
+﻿
+
+<h3>
+    Render By Miladi to Shamsi Component:
+    @(convertedDate)
+</h3>
+
+@code {
+    [Parameter]
+    public DateTime inputDate { get; set; }
+    private string convertedDate = "";
+    protected override void OnInitialized()
+    {
+        Convert();
+    }
+    private void Convert()
+    {
+        System.Globalization.PersianCalendar persianCalendar = new System.Globalization.PersianCalendar();
+        string year = persianCalendar.GetYear(inputDate).ToString();
+        string month = persianCalendar.GetMonth(inputDate).ToString().PadLeft(2, '0');
+        string day = persianCalendar.GetDayOfMonth(inputDate).ToString().PadLeft(2, '0');
+        convertedDate=$"{year}/{month}/{day}";
+
+    }
+}
