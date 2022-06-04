@@ -1,0 +1,109 @@
+﻿@page "/ToDoItemSample"
+@using Client.Models
+<h3>ToDo Item Sample</h3>
+
+<div class="row">
+    <div class="col">
+        <h5>Add New Row</h5>
+        Title
+        <br />
+        <input type="text" class="form-control" @bind="newTodoTitle" @bind:event="oninput" />
+        <br />
+        <button type="button" class="btn btn-primary" @onclick="AddNewTodo">Add Todo</button>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col">
+        <h3> To Do </h3>
+        <ul>
+            @foreach (var item in ToDos)
+            {
+                <li>
+                    <input type="checkbox" @bind="@item.IsDone" />
+                    @(item.Title)
+                </li>
+            }
+        </ul>
+        <hr />
+        <h3>
+            ToDos
+            [
+            @(ToDos.Where(x=>x.IsDone==false).Count())
+            ]
+        </h3>
+
+        <ul>
+            @foreach (var item in ToDos)
+            {
+                <li>
+                    <button type="button" class="btn btn-danger btn-sm" @onclick="()=> {Delete(item);}">X</button>
+                    <input type="checkbox" @bind="@item.IsDone" />
+                    @(item.Title)
+                </li>
+            }
+        </ul>
+        <hr />
+        <h3>
+            ToDos
+            [
+            @(ToDos.Where(x=>x.IsDone==false).Count())
+            ]
+        </h3>
+
+        <ul>
+            @for (int i = 0; i < ToDos.Count; i++)
+            {
+                <li>
+                    @(i+1)
+                    <button type="button" class="btn btn-danger btn-sm" @onclick="()=> {Delete(ToDos[i]);}">X</button>
+                    <input type="checkbox" @bind="@ToDos[i].IsDone" />
+                    @(ToDos[i].Title)
+                </li>
+            }
+        </ul>
+    </div>
+</div>
+
+
+
+@code {
+    private List<ToDoItem> ToDos;
+    protected override void OnInitialized()
+    {
+        ToDos =new List<ToDoItem>();
+        for (int i = 0; i < 10; i++)
+        {
+            var todo = new ToDoItem
+                {
+                    Title=$"To Do Item {i}",
+                    IsDone=(i%2==0),
+                    ItemId=i+1
+                };
+            ToDos.Add(todo);
+        }
+    }
+    public string newTodoTitle { get; set; }
+    public void Delete(ToDoItem item)
+    {
+        ToDos.Remove(item);
+    }
+    public void AddNewTodo()
+    {
+        if (string.IsNullOrWhiteSpace(newTodoTitle))
+        {
+            newTodoTitle=string.Empty;
+            return;
+        }
+        if (ToDos.Any(x => x.Title==newTodoTitle))
+        {
+            return;
+        }
+        var newtodo = new ToDoItem
+            {
+                Title=newTodoTitle,
+                IsDone=false,
+            };
+        ToDos.Add(newtodo);
+    }
+}

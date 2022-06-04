@@ -1,0 +1,45 @@
+﻿@page "/OnInitializedPage"
+<h3>@Message</h3>
+
+@code {
+    public string Message { get; set; }
+    protected override void OnInitialized()
+    {
+        Task.Delay(1000);
+        Message="OnInitialized()";
+    }
+    protected override void OnAfterRender(bool firstRender)
+    {
+        Task.Delay(1000);
+        Message="OnAfterRender()";
+
+        base.OnAfterRender(firstRender);
+    }
+    protected override Task OnAfterRenderAsync(bool firstRender)
+    {
+        Task.Delay(1000);
+        Message="OnAfterRenderAsync()";
+
+        return base.OnAfterRenderAsync(firstRender);
+    }
+    protected override Task OnInitializedAsync()
+    {
+        Task.Delay(1000);
+        Message="OnInitializedAsync()";
+
+        return base.OnInitializedAsync();
+    }
+    protected override void OnParametersSet()
+    {
+        Task.Delay(1000);
+        Message="OnParametersSet()";
+
+        base.OnParametersSet();
+    }
+    protected override Task OnParametersSetAsync()
+    {
+        Task.Delay(1000);
+        Message="OnParametersSetAsync()";
+        return base.OnParametersSetAsync();
+    }
+}
