@@ -1,0 +1,6 @@
+﻿@page "/PageWithParameter/{Id:int}"
+<h3>PageWithParameter is : @(Id)</h3>
+@code {
+    [Parameter]
+    public int Id { get; set; }
+}

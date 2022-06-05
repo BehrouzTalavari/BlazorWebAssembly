@@ -1,0 +1,24 @@
+﻿@page "/NavigationManagerPage"
+
+@inject NavigationManager navigationManager
+
+<h3>NavigationManagerPage</h3>
+
+<button type="button" @onclick="GoToPage01FalseForceLoad">Go To Page with False Force Load</button>
+
+<button type="button" @onclick="GoToPage01TrueForceLoad">Go To Page with True Force Load</button>
+
+@code 
+{
+
+    private void GoToPage01FalseForceLoad()
+    {
+        navigationManager.NavigateTo(uri: "/PageWithParameter/8", forceLoad: false);
+    }
+    
+    private void GoToPage01TrueForceLoad()
+    {
+        navigationManager.NavigateTo(uri: "/PageWithParameter/9", forceLoad: false);
+    }
+
+}
